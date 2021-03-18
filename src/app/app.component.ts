@@ -16,6 +16,7 @@ salary: number = 1234.5;
 fecha: Date = new Date();
 idioma: string = 'en';
 videoURL: string = "https://www.youtube.com/embed/I9ceqw5Ny-4";
+activar: boolean = true;
 
 valorPromesa = new Promise<string>((resolve) => {
   setTimeout(() => {
