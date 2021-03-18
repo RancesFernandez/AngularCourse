@@ -15,6 +15,7 @@ percent: number = 0.234;
 salary: number = 1234.5;
 fecha: Date = new Date();
 idioma: string = 'en';
+videoURL: string = "https://www.youtube.com/embed/I9ceqw5Ny-4";
 
 valorPromesa = new Promise<string>((resolve) => {
   setTimeout(() => {
