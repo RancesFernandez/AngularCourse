@@ -1,31 +1,51 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SpotifyService {
 
-  constructor( private http: HttpClient ) { }
+  constructor(private http: HttpClient) { }
 
-  getNewReleases(){
+  getQuery(query: string){
+
+    const url = `https://api.spotify.com/v1/${query}`;
 
     const headers = new HttpHeaders({
-      'Authorization': "Bearer BQAjo_geaEb7d8fxYzgbULZRzc9ACxs5AAhlRdkS5-SW1Ca_WV5NYS9RzOwZW3LD-l-J-UcIRlwr_gbhrmo"
+      'Authorization': "Bearer BQCX-zvt8I1TJasvjD-HKDcLxgFP6jS6sf5pGku666N2dpraQq1DSA4t-tR6TV2QpL2l2M9feslfrCyTKJs"
     });
 
-    return this.http.get('https://api.spotify.com/v1/browse/new-releases', { headers });
+    return this.http.get(url, { headers });
 
   }
 
-  getArtist(term: string){
+  getNewReleases() {
 
-    const headers = new HttpHeaders({
-      'Authorization': "Bearer BQAjo_geaEb7d8fxYzgbULZRzc9ACxs5AAhlRdkS5-SW1Ca_WV5NYS9RzOwZW3LD-l-J-UcIRlwr_gbhrmo"
-    });
+    return this.getQuery('browse/new-releases?limit=20')
+          .pipe(map(data => data['albums'].items));
 
-    return this.http.get(`https://api.spotify.com/v1/search?q=${ term }&type=artist&limit=15`, { headers });
-  
+    // const headers = new HttpHeaders({
+    //   'Authorization': "Bearer BQAWgr8uAjm1oo-5JiRIj-9-onDKcE5HTLIDh0bnGAd4u5LgFz2bJ2ZcG37SQzhslU5sgC1ho5KsnQtxilE"
+    // });
+
+    // return this.http.get('https://api.spotify.com/v1/browse/new-releases', { headers })
+    //   .pipe(map(data => data['albums'].items));
+  }
+
+  getArtist(term: string) {
+
+    return this.getQuery(`search?q=${term}&type=artist&limit=15`)
+    .pipe(map(data => data['artists'].items));
+
+    // const headers = new HttpHeaders({
+    //   'Authorization': "Bearer BQAWgr8uAjm1oo-5JiRIj-9-onDKcE5HTLIDh0bnGAd4u5LgFz2bJ2ZcG37SQzhslU5sgC1ho5KsnQtxilE"
+    // });
+
+    // return this.http.get(`https://api.spotify.com/v1/search?q=${term}&type=artist&limit=15`, { headers })
+    //   .pipe(map(data => data['artists'].items));
+
   }
 }
 
