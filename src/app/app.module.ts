@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { SpotifyService } from './services/spotify.service';
 import { NoimagePipe } from './pipes/noimage.pipe';
 import { TargetsComponent } from './components/targets/targets.component';
+import { LoadingComponent } from './components/shared/loading/loading.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { TargetsComponent } from './components/targets/targets.component';
     ArtistComponent,
     NavbarComponent,
     NoimagePipe,
-    TargetsComponent
+    TargetsComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

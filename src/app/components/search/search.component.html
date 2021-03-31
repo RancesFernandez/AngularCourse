@@ -4,7 +4,10 @@
     </div>
 </div>
 
-<app-targets [items]="artists"></app-targets>
+<app-loading *ngIf="loading" class="m-5"></app-loading>
+
+
+<app-targets *ngIf="!loading" [items]="artists"></app-targets>
 
 
 
