@@ -10,17 +10,26 @@ export class HomeComponent implements OnInit {
 
   newSongs: any[] = [];
   loading: boolean;
+  error: boolean;
+  errorMessage: string;
 
 
   constructor(private spotify: SpotifyService) {
 
     this.loading = true;
+    this.error = false;
 
     this.spotify.getNewReleases()
       .subscribe((data: any) => {
         this.newSongs = data;
         this.loading = false;
 
+
+      }, (errorServicio) => {
+        this.loading = false;
+        this.error = true;
+        console.log(errorServicio);
+        this.errorMessage = errorServicio.error.error.message;
 
       });
 
