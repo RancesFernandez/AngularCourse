@@ -1,0 +1,26 @@
+<ion-header class="ion-no-border" [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-title>
+      Pending
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark" [fullscreen]="true">
+
+  <ion-list color="dark">
+
+    <ion-item color="dark" *ngFor="let list of wishesService.lists"
+                detail>
+
+      <ion-label>
+
+        {{list.title}}
+
+      </ion-label>
+
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>
