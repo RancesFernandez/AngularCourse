@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { WishesService } from '../../services/wishes.service';
+
 
 @Component({
   selector: 'app-tab1',
@@ -8,6 +11,54 @@ import { WishesService } from '../../services/wishes.service';
 })
 export class Tab1Page {
 
-  constructor(public wishesService: WishesService) {}
+  constructor(public wishesService: WishesService,
+    private router: Router,
+    public alertController: AlertController) {
+
+  }
+
+  async addList() {
+
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'New List',
+      inputs: [
+        {
+          name: 'title',
+          type: 'text',
+          placeholder: 'List name'
+        }
+      ],
+      buttons: [{
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel');
+        }
+      },
+      {
+        text: 'Create',
+        handler: (data) => {
+          console.log(data);
+          if (data.title.length === 0) {
+            return;
+          }
+
+         const listId = this.wishesService.createList(data.title);
+
+          this.router.navigateByUrl(`/tabs/tab1/add/${listId}`);
+
+
+        }
+      }
+      ]
+    });
+
+    alert.present();
+  }
+
+  
+
+
 
 }

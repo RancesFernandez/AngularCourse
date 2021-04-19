@@ -9,13 +9,34 @@ const routes: Routes = [
     children: [
       {
         path: 'tab1',
-        loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+          },
+          {
+            path: 'add/:listId',
+            loadChildren: () => import('../add/add.module').then(m => m.AddPageModule)
+          }
+        ]
       },
+
+
       {
         path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+          },
+          {
+            path: 'add/:listId',
+            loadChildren: () => import('../add/add.module').then(m => m.AddPageModule)
+          },
+        ]
       },
-      
+
+
       {
         path: '',
         redirectTo: '/tabs/tab1',
@@ -33,4 +54,4 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }
