@@ -7,11 +7,11 @@ import { Component, OnInit } from '@angular/core';
      Hola mundo... Esta es una etiqueta
     </p>
 
-    <button class="btn btn-primary" (click)="size = size + 5">
+    <button class="btn btn-primary" (click)="size = size + 5; size = size > 45 ? 45 : size">
       <i class="fa fa-plus"></i>
     </button>
 
-    <button class="btn btn-primary" (click)="size = size - 5">
+    <button class="btn btn-primary" (click)="size = size - 5; size = size < 5 ? 5 : size">
       <i class="fa fa-minus"></i>
     </button>
     
